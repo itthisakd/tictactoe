@@ -58,7 +58,6 @@ function App() {
 
   const handleClick = (y, x) => {
     let arr = [...grid];
-    console.log(arr[y][x]);
     if (arr[y][x][0] === "") {
       player ? (arr[y][x] = ["X"]) : (arr[y][x] = ["O"]);
       setGrid(arr);
@@ -102,9 +101,8 @@ function App() {
             : false;
         if (checkHori === false) break;
       }
+      if (checkHori === true) break;
     }
-    console.log("hori" + checkHori);
-
     let checkVert = false;
     for (let x = 0; x < n; x++) {
       for (let y = 0; y < n; y++) {
@@ -114,9 +112,9 @@ function App() {
             : false;
         if (checkVert === false) break;
       }
+      if (checkVert === true) break;
     }
 
-    console.log("vert" + checkVert);
 
     //check diagonal downwards
     let checkDiagDown = false;
@@ -125,25 +123,24 @@ function App() {
         grid[x][x][0] === grid[0][0][0] && grid[0][0][0] !== "" ? true : false;
       if (checkDiagDown === false) break;
     }
-    console.log("diagdown" + checkDiagDown);
 
     let checkDiagUp = false;
     const checkDiagonalUp = () => {
       //check diagonal upwards
-      let x = 0;
-      let y = n - 1;
-      while (x < n && y >= 0) {
-        x++;
-        y--;
+      let i = 0;
+      let j = Number(n) - 1;
+      while (i < n && j >= 0) {
         checkDiagUp =
-          grid[y][x][0] === grid[n - 1][0][0] && grid[n - 1][0][0] !== ""
+          grid[j][i][0] === grid[Number(n) - 1][0][0] &&
+          grid[Number(n) - 1][0][0] !== ""
             ? true
             : false;
         if (checkDiagUp === false) break;
+        i++;
+        j--;
       }
     };
     checkDiagonalUp();
-    console.log("diagup" + checkDiagUp);
 
     if (checkVert || checkHori || checkDiagUp || checkDiagDown) {
       setTimeout(() => {
@@ -153,9 +150,6 @@ function App() {
     } else {
       setPlayer(!player);
     }
-
-    // if (checkVert === true || checkHori === true || checkDiag === true)
-    //   console.log("WIN");
   };
 
   const handleResetClick = () => {
