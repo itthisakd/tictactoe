@@ -73,6 +73,7 @@ function App() {
     setGrid(createGrid(n));
     setSubmitted(true);
     setHasWon(false);
+    setDraw(false);
   };
 
   const readGrid = (arr) => {
