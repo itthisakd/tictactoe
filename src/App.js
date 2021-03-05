@@ -93,7 +93,6 @@ function App() {
   };
 
   const checkWin = () => {
-    //check vertical
     let checkHori = false;
     for (let y = 0; y < n; y++) {
       for (let x = 0; x < n; x++) {
@@ -101,12 +100,11 @@ function App() {
           grid[y][x][0] === grid[y][0][0] && grid[y][0][0] !== ""
             ? true
             : false;
-        if (!checkHori) break;
+        if (checkHori === false) break;
       }
     }
     console.log("hori" + checkHori);
 
-    //check horizontal
     let checkVert = false;
     for (let x = 0; x < n; x++) {
       for (let y = 0; y < n; y++) {
@@ -114,7 +112,7 @@ function App() {
           grid[y][x][0] === grid[0][x][0] && grid[0][x][0] !== ""
             ? true
             : false;
-        if (!checkVert) break;
+        if (checkVert === false) break;
       }
     }
 
@@ -125,7 +123,7 @@ function App() {
     for (let x = 0; x < n; x++) {
       checkDiagDown =
         grid[x][x][0] === grid[0][0][0] && grid[0][0][0] !== "" ? true : false;
-      if (!checkDiagDown) break;
+      if (checkDiagDown === false) break;
     }
     console.log("diagdown" + checkDiagDown);
 
@@ -141,7 +139,7 @@ function App() {
           grid[y][x][0] === grid[n - 1][0][0] && grid[n - 1][0][0] !== ""
             ? true
             : false;
-        if (!checkDiagUp) break;
+        if (checkDiagUp === false) break;
       }
     };
     checkDiagonalUp();
