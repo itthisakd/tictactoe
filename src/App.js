@@ -8,9 +8,10 @@ function App() {
   const [grid, setGrid] = useState([]);
   const [player, setPlayer] = useState(true);
   let number = player ? "X" : "O";
-  const [active, setActive] = useState(true);
+  // const [active, setActive] = useState(true);
   const [hasWon, setHasWon] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [draw, setDraw] = useState(false);
 
   const Row = styled.div`
     height: 50px;
@@ -61,7 +62,9 @@ function App() {
     if (arr[y][x][0] === "") {
       player ? (arr[y][x] = ["X"]) : (arr[y][x] = ["O"]);
       setGrid(arr);
+      checkDraw();
       checkWin();
+      console.log(draw);
     }
   };
 
@@ -91,6 +94,23 @@ function App() {
     });
   };
 
+  const checkDraw = () => {
+    let filled = true;
+    for (let y = 0; y < n; y++) {
+      if (filled === false) break;
+      for (let x = 0; x < n; x++) {
+        filled = grid[y][x][0] === "" ? false : true;
+        if (filled === false) break;
+      }
+    }
+    if (filled === true && hasWon === false) {
+      setTimeout(() => {
+        setDraw(true);
+        setSubmitted(false);
+      }, 1000);
+    }
+  };
+
   const checkWin = () => {
     let checkHori = false;
     for (let y = 0; y < n; y++) {
@@ -103,6 +123,7 @@ function App() {
       }
       if (checkHori === true) break;
     }
+
     let checkVert = false;
     for (let x = 0; x < n; x++) {
       for (let y = 0; y < n; y++) {
@@ -114,7 +135,6 @@ function App() {
       }
       if (checkVert === true) break;
     }
-
 
     //check diagonal downwards
     let checkDiagDown = false;
@@ -146,7 +166,7 @@ function App() {
       setTimeout(() => {
         setHasWon(true);
         setSubmitted(false);
-      }, 1500);
+      }, 1000);
     } else {
       setPlayer(!player);
     }
@@ -154,6 +174,7 @@ function App() {
 
   const handleResetClick = () => {
     setSubmitted(false);
+    setDraw(false);
   };
 
   return (
@@ -218,6 +239,25 @@ function App() {
               `}
             >
               PLAYER {number} HAS WON
+            </h1>
+            <h3
+              css={css`
+                text-align: center;
+              `}
+            >
+              Please enter grid size to start new game!
+            </h3>
+          </div>
+        )}
+
+        {draw && (
+          <div>
+            <h1
+              css={css`
+                text-align: center;
+              `}
+            >
+              IT'S A DRAW
             </h1>
             <h3
               css={css`
