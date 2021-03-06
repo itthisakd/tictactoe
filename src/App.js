@@ -8,7 +8,6 @@ function App() {
   const [grid, setGrid] = useState([]);
   const [player, setPlayer] = useState(true);
   let number = player ? "X" : "O";
-  // const [active, setActive] = useState(true);
   const [hasWon, setHasWon] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [draw, setDraw] = useState(false);
@@ -74,6 +73,7 @@ function App() {
     setSubmitted(true);
     setHasWon(false);
     setDraw(false);
+    console.log(draw);
   };
 
   const readGrid = (arr) => {
@@ -108,7 +108,7 @@ function App() {
       setTimeout(() => {
         setDraw(true);
         setSubmitted(false);
-      }, 1000);
+      }, 500);
     }
   };
 
@@ -167,7 +167,7 @@ function App() {
       setTimeout(() => {
         setHasWon(true);
         setSubmitted(false);
-      }, 1000);
+      }, 500);
     } else {
       setPlayer(!player);
     }
@@ -176,6 +176,7 @@ function App() {
   const handleResetClick = () => {
     setSubmitted(false);
     setDraw(false);
+    console.log(draw);
   };
 
   return (
