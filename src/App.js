@@ -12,6 +12,7 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [draw, setDraw] = useState(false);
 
+
   const Row = styled.div`
     height: 50px;
     display: flex;
@@ -198,6 +199,7 @@ function App() {
           TIC TAC TOE
         </h1>
         {!submitted && (
+          //n input field
           <form onSubmit={handleSubmit}>
             <h3>Choose grid size: </h3>
             <input type="number" onChange={handleInputChange} />
@@ -207,6 +209,7 @@ function App() {
           </form>
         )}
         {submitted && (
+          //reset button
           <button
             css={css`
               font-size: 20px;
@@ -221,6 +224,7 @@ function App() {
       <br />
       <div>
         {submitted && (
+          //players turn message
           <body>
             <h3
               css={css`
@@ -234,6 +238,7 @@ function App() {
         )}
 
         {hasWon && (
+          //player has won message
           <div>
             <h1
               css={css`
@@ -253,6 +258,7 @@ function App() {
         )}
 
         {draw && (
+          //draw message
           <div>
             <h1
               css={css`
